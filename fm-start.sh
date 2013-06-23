@@ -1,1 +1,1 @@
-java -jar target/foodmuse-distro-*.jar server
+java -jar target/foodmuse-distro-*.jar server prod.yml
