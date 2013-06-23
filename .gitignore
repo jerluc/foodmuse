@@ -6,3 +6,4 @@ target
 build
 classes
 logs
+deploy.sh
