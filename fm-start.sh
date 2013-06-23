@@ -1,0 +1,1 @@
+java -jar target/foodmuse-distro-*.jar server

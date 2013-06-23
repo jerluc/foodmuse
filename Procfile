@@ -1,1 +1,1 @@
-web:    java -cp target/foodmuse-distro-*.jar fm.FoodMuse server
+web: sh fm-start.sh
