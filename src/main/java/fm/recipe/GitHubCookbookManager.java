@@ -37,7 +37,12 @@ public class GitHubCookbookManager implements CookbookManager {
 
     @Override
     public Recipe lookup(final ID<Recipe> recipeID) {
-        return null;
+        try {
+            final Gist gist = GISTS.getGist(recipeID.id());
+            return new Recipe(gist.getId(), gist.getUser().getLogin());
+        } catch (final IOException e) {
+            throw propagate(e);
+        }
     }
 
     @Override
@@ -66,11 +71,22 @@ public class GitHubCookbookManager implements CookbookManager {
 
     @Override
     public Recipe erase(final Recipe recipe) {
-        return null;
+        try {
+            GISTS.deleteGist(recipe.id());
+            return recipe;
+        } catch (final IOException e) {
+            throw propagate(e);
+        }
     }
 
     @Override
     public Recipe fork(final Recipe recipe) {
-        return null;
+        try {
+            final Gist original = GISTS.getGist(recipe.id());
+            final Gist gist = GISTS.createGist(original);
+            return new Recipe(gist.getId(), gist.getUser().getLogin());
+        } catch (final IOException e) {
+            throw propagate(e);
+        }
     }
 }
