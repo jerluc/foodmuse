@@ -5,5 +5,5 @@ package fm.model;
  * @since 6/19/13
  */
 public interface Identifiable {
-    String id();
+    String getId();
 }

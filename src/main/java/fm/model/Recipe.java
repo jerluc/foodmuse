@@ -1,6 +1,9 @@
 package fm.model;
 
+import com.google.common.collect.ImmutableList;
 import fm.annotation.Serializable;
+
+import java.util.List;
 
 /**
  * @author Jeremy Lucas
@@ -8,24 +11,40 @@ import fm.annotation.Serializable;
  */
 @Serializable
 public class Recipe implements Identifiable {
+
     protected final String id;
 
-    protected final String author;
+    protected final ID<Chef> chefRef;
 
-    public Recipe(
-        final String id,
-        final String author
-    ) {
+    protected final List<Portion> portions;
+
+    protected final List<Step> steps;
+
+    public Recipe(final ID<Chef> chefRef, List<Portion> portions, final List<Step> steps) {
+        this(String.valueOf(System.nanoTime()), chefRef, portions, steps);
+    }
+
+    public Recipe(final String id, final ID<Chef> chefRef, final List<Portion> portions, final List<Step> steps) {
         this.id = id;
-        this.author = author;
+        this.chefRef = chefRef;
+        this.portions = portions;
+        this.steps = steps;
     }
 
     @Override
-    public String id() {
+    public String getId() {
         return id;
     }
 
-    public String author() {
-        return author;
+    public ID<Chef> getChefRef() {
+        return chefRef;
+    }
+
+    public List<Portion> getPortions() {
+        return ImmutableList.copyOf(portions);
+    }
+
+    public List<Step> getSteps() {
+        return ImmutableList.copyOf(steps);
     }
 }

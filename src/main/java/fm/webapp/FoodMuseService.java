@@ -3,7 +3,10 @@ package fm.webapp;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
-import fm.webapp.conf.FoodMuseServiceConfiguration;import fm.webapp.resource.FoodMuseResource;
+import fm.recipe.InMemoryCookbookManager;
+import fm.webapp.conf.FoodMuseServiceConfiguration;
+import fm.webapp.resource.CookbookResource;
+import fm.webapp.resource.FoodMuseResource;
 
 /**
  * @author: jl
@@ -17,5 +20,7 @@ public class FoodMuseService extends Service<FoodMuseServiceConfiguration> {
 
     @Override
     public void run(final FoodMuseServiceConfiguration configuration, final Environment environment) throws Exception {
-        environment.addResource(new FoodMuseResource());}
+        environment.addResource(new FoodMuseResource());
+        environment.addResource(new CookbookResource(new InMemoryCookbookManager()));
+    }
 }
