@@ -14,12 +14,9 @@ public abstract class Amount {
     protected final int denominator;
 
     public Amount(final int whole, final int numerator, final int denominator) {
-        sanity(whole >= 0, "Whole number must be greater than or equal to zero", whole);
-        sanity(numerator >= 0, "Numerator must be greater than or equal to zero", numerator);
-        sanity(denominator > 0, "Denominator must be greater than zero", denominator);
-        this.whole = whole;
-        this.numerator = numerator;
-        this.denominator = denominator;
+        this.whole = sanity(whole >= 0, "Whole number must be greater than or equal to zero", whole);
+        this.numerator = sanity(numerator >= 0, "Numerator must be greater than or equal to zero", numerator);
+        this.denominator = sanity(denominator > 0, "Denominator must be greater than zero", denominator);
     }
 
     public int getWhole() {
